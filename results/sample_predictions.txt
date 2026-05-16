@@ -1,0 +1,112 @@
+==============================================================================
+PART 3 — NLP SENTIMENT CLASSIFICATION: SAMPLE PREDICTIONS
+Customer Support Text Classification Dataset  |  3-class Sentiment
+==============================================================================
+
+MODEL 1: [BoW] Logistic Regression  (Test Acc=100.0%, Macro F1=1.000)
+MODEL 2: BiLSTM Baseline             (Test Acc= 82.3%, Macro F1=0.805)
+
+──────────────────────────────────────────────────────────────────────────────
+5 SAMPLE PREDICTIONS PER CLASS — [BoW] Logistic Regression
+──────────────────────────────────────────────────────────────────────────────
+
+──────────────────── CLASS: NEGATIVE ────────────────────
+  [1] ✓ CORRECT  |  True: negative  →  Predicted: negative  (conf=98.6%)
+      Message: "My refund is still pending and this experience is frustrating."
+  [2] ✓ CORRECT  |  True: negative  →  Predicted: negative  (conf=98.7%)
+      Message: "The app crashes whenever I try to use analytics."
+  [3] ✓ CORRECT  |  True: negative  →  Predicted: negative  (conf=99.1%)
+      Message: "Billing is incorrect and I was charged twice this month."
+  [4] ✓ CORRECT  |  True: negative  →  Predicted: negative  (conf=99.2%)
+      Message: "I want to cancel because the service quality is poor and unreliable. My tic"
+  [5] ✓ CORRECT  |  True: negative  →  Predicted: negative  (conf=98.6%)
+      Message: "My refund is still pending and this experience is frustrating."
+
+──────────────────── CLASS: NEUTRAL ────────────────────
+  [1] ✓ CORRECT  |  True:  neutral  →  Predicted:  neutral  (conf=99.1%)
+      Message: "Can someone explain the difference between the plans?"
+  [2] ✓ CORRECT  |  True:  neutral  →  Predicted:  neutral  (conf=99.1%)
+      Message: "Can someone explain the difference between the plans?"
+  [3] ✓ CORRECT  |  True:  neutral  →  Predicted:  neutral  (conf=98.7%)
+      Message: "I want to understand the warranty terms for this product."
+  [4] ✓ CORRECT  |  True:  neutral  →  Predicted:  neutral  (conf=98.8%)
+      Message: "I need information about the payment process. Please respond as soon as pos"
+  [5] ✓ CORRECT  |  True:  neutral  →  Predicted:  neutral  (conf=98.7%)
+      Message: "Can you confirm whether my ticket has been assigned? My ticket number is 65"
+
+──────────────────── CLASS: POSITIVE ────────────────────
+  [1] ✓ CORRECT  |  True: positive  →  Predicted: positive  (conf=96.5%)
+      Message: "I like the new payment and it is easy to use. My ticket number is 65556."
+  [2] ✓ CORRECT  |  True: positive  →  Predicted: positive  (conf=99.3%)
+      Message: "Great service and clear communication from the support team."
+  [3] ✓ CORRECT  |  True: positive  →  Predicted: positive  (conf=98.8%)
+      Message: "The response from the team was helpful and professional."
+  [4] ✓ CORRECT  |  True: positive  →  Predicted: positive  (conf=97.8%)
+      Message: "I like the new video call and it is easy to use."
+  [5] ✓ CORRECT  |  True: positive  →  Predicted: positive  (conf=97.0%)
+      Message: "I like the new report download and it is easy to use."
+
+──────────────────────────────────────────────────────────────────────────────
+OVERALL TEST SET PERFORMANCE — [BoW] Logistic Regression
+──────────────────────────────────────────────────────────────────────────────
+
+              precision    recall  f1-score   support
+
+    negative       1.00      1.00      1.00        99
+     neutral       1.00      1.00      1.00       105
+    positive       1.00      1.00      1.00        96
+
+    accuracy                           1.00       300
+   macro avg       1.00      1.00      1.00       300
+weighted avg       1.00      1.00      1.00       300
+
+──────────────────────────────────────────────────────────────────────────────
+OVERALL TEST SET PERFORMANCE — BiLSTM Baseline
+──────────────────────────────────────────────────────────────────────────────
+
+              precision    recall  f1-score   support
+
+    negative       1.00      0.46      0.63        99
+     neutral       0.98      1.00      0.99       105
+    positive       0.65      1.00      0.79        96
+
+    accuracy                           0.82       300
+   macro avg       0.88      0.82      0.81       300
+weighted avg       0.88      0.82      0.81       300
+
+──────────────────────────────────────────────────────────────────────────────
+FULL MODEL COMPARISON TABLE
+──────────────────────────────────────────────────────────────────────────────
+
+Model                                    Vectorizer    Test Acc  Macro F1
+──────────────────────────────────────────────────────────────────────────────
+  Logistic Regression                    BoW             1.0000    1.0000
+  Naive Bayes                            BoW             1.0000    1.0000
+  Linear SVM                             BoW             1.0000    1.0000
+  Logistic Regression                    TF-IDF          1.0000    1.0000
+  Naive Bayes                            TF-IDF          1.0000    1.0000
+  Linear SVM                             TF-IDF          1.0000    1.0000
+
+  BiLSTM Baseline                        Embedding       0.8233    0.8051
+  Smaller LSTM                           Embedding       0.6467    0.5777
+  Larger LSTM + RegDrop                  Embedding       0.3500    0.1728
+
+──────────────────────────────────────────────────────────────────────────────
+DATASET NOTE
+──────────────────────────────────────────────────────────────────────────────
+
+This dataset is template-generated with only 146 unique tokens after cleaning.
+Each sentiment class uses a non-overlapping vocabulary cluster, making the
+classification trivially separable for any bag-of-words model.
+
+In a real-world scenario (diverse, noisy, user-typed messages), classical
+bag-of-words models would score significantly lower and sequence models
+(LSTM, BERT, GPT) would demonstrate their advantage through:
+  • Preserving word ORDER  ("not good" ≠ "good not")
+  • Capturing CONTEXT      ("great" in "not great" = negative)
+  • Handling NEGATION      ("barely functional" = negative despite no negative keyword)
+  • Learning SEMANTICS     ("furious" ≈ "angry" via embeddings)
+
+──────────────────────────────────────────────────────────────────────────────
+END OF SAMPLE PREDICTIONS
+──────────────────────────────────────────────────────────────────────────────
